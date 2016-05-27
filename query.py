@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 """
 Build a blank QUERY_<NAME>.sql file
 """
