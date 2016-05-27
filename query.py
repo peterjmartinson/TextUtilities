@@ -2,8 +2,8 @@
 """
 Build a blank QUERY_<NAME>.sql file
 """
-import csv
-
+import textwrap
+import datetime
 out = []
 
 out.append('ALTER SESSION SET STAR_TRANSFORMATION_ENABLED=FALSE;')
@@ -17,6 +17,7 @@ out.append(' * Open Date:   ')
 out.append(' * Close Date:  ')
 out.append(' *')
 out.append(' * Description: ')
+out.append(' *              ')
 out.append('*/')
 out.append('')
 out.append('/*================================= NOTES ======================================')
@@ -33,18 +34,25 @@ title       = input("Title of report: ")
 ticket      = input("Ticket number (e.g. SR1234567): ")
 author      = input("Author name (e.g. First Last): ")
 description = input("Description (don't include carriage returns): ")
+date        = datetime.datetime.now().strftime("%m/%d/%Y")
 
 out[2]  = out[2]  + user[0] + ' ' + user[1]
 out[3]  = out[3]  + title
 out[4]  = out[4]  + ticket
 out[6]  = out[6]  + author
-out[10] = out[10] + description
+out[7]  = out[7]  + date
+
+descriptionLines = textwrap.wrap(description, (80-17), break_long_words=False)
 
 outFileName = 'QUERY_' + user[1].upper() + '.sql'
 
 with(open(outFileName, 'w')) as outFile:
-
-  for element in out:
+  for element in out[0:10]:
+    outFile.write(element + '\n')
+  outFile.write(out[10] + descriptionLines[0] + '\n')
+  for element in descriptionLines[1:]:
+    outFile.write(out[11] + element + '\n')
+  for element in out[12:]:
     outFile.write(element + '\n')
 
 # fin
