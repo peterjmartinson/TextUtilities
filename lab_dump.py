@@ -2,23 +2,30 @@
 """
 Build a blank QUERY_<NAME>.sql file
 """
+import datetime
 
 print("Remember: garbage in, garbage out.")
 requester = input("Requester's last name: ")
 ticket    = input("Ticket number: ")
-dateBegin = input("Start Date (MM/DD/YYYY): ")
-dateEnd   = input("End Date (MM/DD/YYYY): ")
+startDate = input("Start Date (MM/DD/YYYY): ")
+endDate   = input("End Date (MM/DD/YYYY): ")
 visitFlag = input("Labs by patient (1) or by visit (2)? ")
+
+# convert the dates to date objects
+dateBegin = datetime.datetime.strptime(startDate,"%m/%d/%Y")
+dateEnd = datetime.datetime.strptime(endDate,"%m/%d/%Y")
 
 """if (visitFlag != 1) or (visitFlag != 2):
   sys.exit()
 """
-# need to make these real dates, not just strings
-if dateBegin < '05/18/2008' and dateEnd >= '05/18/2008':
+if ( dateBegin < datetime.datetime.strptime("05/18/2008", "%m/%d/%Y")
+    and dateEnd >= datetime.datetime.strptime("05/18/2008", "%m/%d/%Y") ):
   sources = "('SCM','CERNER','EPIC')"
-if dateBegin < '05/18/2008' and dateEnd < '05/18/2008':
+if ( dateBegin < datetime.datetime.strptime("05/18/2008", "%m/%d/%Y")
+    and dateEnd < datetime.datetime.strptime("05/18/2008", "%m/%d/%Y") ):
   sources = "('SCM','EPIC')"
-if dateBegin >= '05/18/2008' and dateEnd >= '05/18/2008':
+if ( dateBegin >= datetime.datetime.strptime("05/18/2008", "%m/%d/%Y")
+    and dateEnd >= datetime.datetime.strptime("05/18/2008", "%m/%d/%Y") ):
   sources = "('CERNER','EPIC')"
 
 out = []
@@ -50,8 +57,8 @@ out.append('    and R.SOURCE_CODE IN ' + sources)
 out.append('  inner join ODS.R_RESULT_ITEM I')
 out.append('    on I.PK_RESULT_ITEM_ID = R.FK_RESULT_ITEM_ID')
 out.append('    and I.SOURCE_CODE IN ' + sources)
-out.append("where E.ORDER_DATE >= to_date('" + dateBegin + "','MM/DD/YYYY')")
-out.append("  and E.ORDER_DATE <= to_date('" + dateEnd   + "','MM/DD/YYYY')")
+out.append("where E.ORDER_DATE >= to_date('" + dateBegin.strftime("%m/%d/%Y") + "','MM/DD/YYYY')")
+out.append("  and E.ORDER_DATE <= to_date('" + dateEnd.strftime("%m/%d/%Y")   + "','MM/DD/YYYY')")
 out.append(';')
 
 
