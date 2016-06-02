@@ -6,7 +6,7 @@ import textwrap
 import datetime
 out = []
 
-out.append('ALTER SESSION SET STAR_TRANSFORMATION_ENABLED=FALSE;')
+out.append('alter session set STAR_TRANSFORMATION_ENABLED=FALSE;')
 out.append('/*')
 out.append(' * Reqester:    ')
 out.append(' * Title:       ')
@@ -38,7 +38,7 @@ date        = datetime.datetime.now().strftime("%m/%d/%Y")
 
 out[2]  = out[2]  + user[0] + ' ' + user[1]
 out[3]  = out[3]  + title
-out[4]  = out[4]  + ticket
+out[4]  = out[4]  + ticket.upper()
 out[6]  = out[6]  + author
 out[7]  = out[7]  + date
 
