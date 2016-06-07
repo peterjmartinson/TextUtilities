@@ -34,7 +34,7 @@ title       = input("Title of report: ")
 ticket      = input("Ticket number (e.g. SR1234567): ")
 author      = input("Author name (e.g. First Last): ")
 description = input("Description (don't include carriage returns): ")
-date        = datetime.datetime.now().strftime("%m/%d/%Y")
+date        = datetime.datetime.now().strftime("%B %d, %Y").lstrip("0").replace(" 0", " ")
 
 out[2]  = out[2]  + user[0] + ' ' + user[1]
 out[3]  = out[3]  + title
