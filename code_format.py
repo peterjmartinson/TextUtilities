@@ -66,11 +66,12 @@ for code in codes:
       parsedCodes.append(parsed)
 
 # Generate the output string
-for code in set(parsedCodes):
+parsedCodeList = sorted(set(parsedCodes))
+for code in parsedCodeList:
   if i == 0:
     outCode += '('
   outCode += "'" + code + "'"
-  if i == len(parsedCodes)-1:
+  if i == len(parsedCodeList)-1:
     outCode += ")"
   else:
     outCode += ", "

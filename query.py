@@ -27,6 +27,10 @@ out.append('/*=============================== END NOTES ========================
 out.append('')
 out.append('/*_____________________________ Build the Query ______________________________*/')
 out.append('')
+out.append('')
+out.append('')
+out.append('/*______________________________ Report Tables _______________________________*/')
+out.append('')
 
 requester   = input("Requester's name (e.g. First Last): ")
 user = requester.split(" ")
