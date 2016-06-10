@@ -6,6 +6,7 @@ Date:   June 8, 2016
 """
 
 import math
+# import textwrap
 import re
 
 print("This program requires an external file that contains a list of ICD-9/ICD-10 codes.")
@@ -78,4 +79,5 @@ for code in parsedCodeList:
     i += 1
 
 print(outCode)
-
+# outCodeWrapped = textwrap.wrap(outCode, 80, break_long_words = False)
+# print(outCodeWrapped)
