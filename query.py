@@ -8,7 +8,7 @@ out = []
 
 out.append('alter session set STAR_TRANSFORMATION_ENABLED=FALSE;')
 out.append('/*')
-out.append(' * Reqester:    ')
+out.append(' * Requester:    ')
 out.append(' * Title:       ')
 out.append(' * Ticket:      ')
 out.append(' *')
