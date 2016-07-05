@@ -78,6 +78,7 @@ for code in parsedCodeList:
     outCode += ", "
     i += 1
 
+print('\n' + 'Nicely formatted code list:')
 print(outCode)
 # outCodeWrapped = textwrap.wrap(outCode, 80, break_long_words = False)
 # print(outCodeWrapped)

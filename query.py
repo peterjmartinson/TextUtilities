@@ -8,7 +8,7 @@ out = []
 
 out.append('alter session set STAR_TRANSFORMATION_ENABLED=FALSE;')
 out.append('/*')
-out.append(' * Requester:    ')
+out.append(' * Requester:   ')
 out.append(' * Title:       ')
 out.append(' * Ticket:      ')
 out.append(' *')
@@ -32,15 +32,19 @@ out.append('')
 out.append('/*______________________________ Report Tables _______________________________*/')
 out.append('')
 
-requester   = input("Requester's name (e.g. First Last): ")
+requester   = input("Requester's name (e.g. First Last) -----------> ")
 user = requester.split(" ")
-title       = input("Title of report: ")
-ticket      = input("Ticket number (e.g. SR1234567): ")
-author      = input("Author name (e.g. First Last): ")
-description = input("Description (don't include carriage returns): ")
+title       = input("Title of report ------------------------------> ")
+ticket      = input("Ticket number (e.g. SR1234567) ---------------> ")
+author      = input("Author name (e.g. First Last) ----------------> ")
+description = input("Description (don't include carriage returns) -> ")
 date        = datetime.datetime.now().strftime("%B %d, %Y").lstrip("0").replace(" 0", " ")
 
-out[2]  = out[2]  + user[0] + ' ' + user[1]
+if ( len(user) > 1 ):
+  out[2] = out[2] + user[0] + ' ' + user[1]
+else:
+  out[2] = out[2] + user[0]
+
 out[3]  = out[3]  + title
 out[4]  = out[4]  + ticket.upper()
 out[6]  = out[6]  + author
@@ -48,7 +52,11 @@ out[7]  = out[7]  + date
 
 descriptionLines = textwrap.wrap(description, (80-17), break_long_words=False)
 
-outFileName = 'QUERY_' + user[1].upper() + '.sql'
+if ( len(user) > 1 ):
+  outFileName = 'QUERY_' + user[1].upper() + '.sql'
+else:
+  outFileName = 'QUERY_' + user[0].upper() + '.sql'
+
 
 with(open(outFileName, 'w')) as outFile:
   for element in out[0:10]:
@@ -59,4 +67,5 @@ with(open(outFileName, 'w')) as outFile:
   for element in out[12:]:
     outFile.write(element + '\n')
 
+print("\n" + outFileName + " created")
 # fin
